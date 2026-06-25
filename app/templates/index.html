@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kanban Board</title>
+
+    <!-- Plik CSS -->
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Kanban Board - Tablica kanban</h1>
+        <p>Aplikacja do zarządzania zadaniami</p>
+    </header>
+
+    <main>
+        {% for board in boards %}
+        <section class="kanban-board">
+            <h2>{{board.name}} - ID: {{board.board_id}}</h2>
+            {% for column in board.columns %}
+            <h3>{{column.name}} - ID: {{column.column_id}}</h3>
+            <section class="kanban-column">
+                <ul>
+                    {% for card in column.cards %}
+                    <li class="kanban-card">
+                        <h4>{{card.title}} - ID: {{card.card_id}}</h4>
+                        <p>{{card.description}}</p>
+                        <p>{{card.deadline}}</p>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </section>
+            {% endfor %}
+        </section>
+        {% endfor %}
+
+        <!--KANBAN BOARD-->
+
+        <section class="forms-board">
+            <form method="post" action="/board"> <!--ADD BOARD-->
+                <fieldset>
+                    <legend>Dodaj tablicę</legend>
+
+                    <label >Nazwa tablicy</label>
+                    <input type="text"  name="name">
+
+                    <button type="submit">Dodaj</button>
+                </fieldset>
+            </form>
+
+
+            <form method="post" action="/board/{board_id}"> <!--MODIFY BOARD-->
+                <fieldset>
+                    <legend>Modyfikacja tablicy</legend>
+
+                    <label >Numer tablicy</label>
+                    <input type="number"  name="board_id">
+                    <label >Nazwa tablicy</label>
+                    <input type="text"  name="name">
+
+                    <button type="submit">Zmodyfikuj</button>
+                </fieldset>
+            </form>
+
+
+            <form method="delete" action="/board/{board_id}">   <!--DELETE BOARD-->
+                <fieldset>
+                    <legend>Usuwanie tablicy</legend>
+
+                    <label >Numer tablicy</label>
+                    <input type="number"  name="board_id">
+
+                    <button type="submit">Skasuj</button>
+                </fieldset>
+            </form>
+        </section>
+
+        <!--KANBAN COLUMN-->
+
+        <section class="form-column">
+            <form method="post" action="/board/{board_id}/column">  <!--ADD COLUMN-->
+                <fieldset>
+                    <legend>Dodaj kolumne</legend>
+
+                    <label >Numer tablicy</label>
+                    <input type="number"  name="board_id">
+                    <label >Nazwa kolumny</label>
+                    <input type="text"  name="name">
+                    <label for="column-order">Numer kolejności kolumny</label>
+                    <input type="number" name="order_id">
+
+                    <button type="submit">Dodaj</button>
+                </fieldset>
+            </form>
+
+
+            <form method="post" action="/board/{board_id}/column/{column_id}">  <!--MODIFY COLUMN-->
+                <fieldset>
+                    <legend>Zmodyfikuj kolumne</legend>
+
+                    <label >Numer tablicy</label>
+                    <input type="number"  name="board_id">
+                    <label >Numer kolumny</label>
+                    <input type="number"  name="column_id">
+                    <label >Nazwa kolumny</label>
+                    <input type="text"  name="name">
+
+                    <button type="submit">Zmodyfikuj</button>
+                </fieldset>
+            </form>
+
+
+            <form method="delete" action="/board/{board_id}/column/{column_id}">  <!--DELETE COLUMN-->
+                <fieldset>
+                    <legend>Usuń kolumne</legend>
+
+                    <label >Numer tablicy</label>
+                    <input type="number"  name="board_id">
+                    <label >Numer kolumny</label>
+                    <input type="number"  name="column_id">
+
+                    <button type="submit">Skasuj</button>
+                </fieldset>
+            </form>
+        </section>
+
+        <!--KANBAN CARD-->
+
+        <section class="form-card">
+            <form method="post" action="/board/{board_id}/column/{column_id}/card"> <!--ADD CARD-->
+                <fieldset>
+                    <legend>Dodaj zadanie</legend>
+
+                    <label >Numer tablicy</label>
+                    <input type="number"  name="board_id">
+                    <label >Numer kolumny</label>
+                    <input type="number"  name="column_id">
+                    <label >Tytuł zadania</label>
+                    <input type="text"  name="title">
+                    <label >Opis zadania</label>
+                    <input type="text"  name="description">
+                    <label >Termin zadania</label>
+                    <input type="datetime-local"  name="deadline">
+
+                    <button type="submit">Dodaj</button>
+                </fieldset>
+            </form>
+
+
+            <form method="post" action="/board/{board_id}/column/{column_id}/card/{card_id}">   <!--MODIFY CARD-->
+                <fieldset>
+                    <legend>Zmodyfikuj zadanie</legend>
+
+                    <label >Numer tablicy</label>
+                    <input type="number"  name="board_id">
+                    <label >Numer kolumny</label>
+                    <input type="number"  name="column_id">
+                    <label >Numer karty</label>
+                    <input type="number" name="card_id">
+                    <label >Tytuł zadania</label>
+                    <input type="text"  name="title">
+                    <label >Opis zadania</label>
+                    <input type="text"  name="description">
+                    <label >Termin zadania</label>
+                    <input type="datetime-local"  name="deadline">
+
+                    <button type="submit">Zmodyfikuj</button>
+                </fieldset>
+            </form>
+
+
+            <form method="delete" action="/board/{board_id}/column/{column_id}/card/{card_id}">   <!--DELETE CARD-->
+                <fieldset>
+                    <legend>Usuń zadanie</legend>
+
+                    <label >Numer tablicy</label>
+                    <input type="number"  name="board_id">
+                    <label >Numer kolumny</label>
+                    <input type="number"  name="column_id">
+                    <label >Numer karty</label>
+                    <input type="number" name="card_id">
+
+                    <button type="submit">Skasuj</button>
+                </fieldset>
+            </form>
+        </section>
+
+    </main>
+
+    <footer >
+
+    </footer>
+
+    <!-- Plik JavaScript -->
+    <script src="/static/js/main.js"></script>
+</body>
+</html>
