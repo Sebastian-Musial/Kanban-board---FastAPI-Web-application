@@ -5,11 +5,18 @@ from sqlmodel import select, Session
 
 from app.database import create_db_and_tables, get_session
 from app.models import KanbanBoard
+from app.routers.board import router as board_routers
+from app.routers.card import router as card_routers
+from app.routers.column import router as column_routers
 
 def create_app(create_tables_on_startup: bool = True) -> FastAPI:  
     #False w celu szybszego uruchamiania aplikacji, 
     #jeżeli aplikacja jest uruchamiana pierwszy raz to należy zostawić True w celu utworzenmia bazy danych z tabelami
     application = FastAPI()
+
+    application.include_router(board_routers)
+    application.include_router(card_routers)
+    application.include_router(column_routers)
 
     application.mount("/static", StaticFiles(directory="static"), name="static")
     templates = Jinja2Templates(directory="templates")
