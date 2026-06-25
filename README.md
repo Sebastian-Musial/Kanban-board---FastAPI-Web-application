@@ -15,6 +15,18 @@ Aplikacja będzie zawierała najczęściej udostępniane funkcje w tablicach kan
 - Przechoyuwwanie kart w wybranych przez użytkownika kolumnach
 
 
+# Jak uruchomić
+
+1. Utwórz .env na podstawie .env.example
+2. Uruchom PostgreSQL: docker compose up -d
+3. Utwórz i aktywuj venv
+    - python -m venv .venv
+    - .venv\Scripts\activate.bat - dla windows aktywacja środowiska w CMD
+    - source .venv/bin/activate - dla Linux to samo
+4. Zainstaluj zależności: pip install -r requirements.txt
+5. Uruchom API: python -m uvicorn app.main:app --reload
+
+
 # Model danych
 
 ## Tablica kanban
