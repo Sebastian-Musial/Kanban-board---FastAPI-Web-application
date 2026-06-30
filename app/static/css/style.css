@@ -5,25 +5,31 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background-color: #f4f5f7;
+    background: linear-gradient(135deg, #eef2ff, #f8fafc);
     color: #222;
 }
 
+/* Header */
+
 header {
-    padding: 24px;
+    padding: 28px 24px;
     text-align: center;
     background-color: #ffffff;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 3px solid #c7d2fe;
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.08);
 }
 
 header h1 {
     margin: 0 0 8px;
+    color: #1e3a8a;
 }
 
 header p {
     margin: 0;
-    color: #666;
+    color: #64748b;
 }
+
+/* Main */
 
 main {
     padding: 24px;
@@ -31,90 +37,195 @@ main {
 
 /* Widok tablicy */
 
-/* .kanban-board {
-    margin-bottom: 32px;
-    padding: 16px;
+.board-container {
+    margin-bottom: 36px;
+    padding: 20px;
     background-color: #ffffff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
+    border: 2px solid #c7d2fe;
+    border-radius: 14px;
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
 }
 
-.kanban-board > h2 {
-    margin-top: 0;
-    margin-bottom: 16px;
+.board-header,
+.column-header,
+.card-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
 }
+
+.board-header {
+    margin-bottom: 18px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #e0e7ff;
+}
+
+.board-header h2 {
+    margin: 0;
+    color: #1e3a8a;
+}
+
+/* Obszar kolumn */
+
+.kanban-board {
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+    overflow-x: auto;
+    padding: 16px;
+    background-color: #f8fafc;
+    border: 2px dashed #cbd5e1;
+    border-radius: 12px;
+}
+
+/* Kolumny */
 
 .kanban-column {
-    display: inline-block;
-    vertical-align: top;
-    width: 300px;
-    min-height: 220px;
-    margin-right: 16px;
-    margin-bottom: 16px;
-    padding: 12px;
-    background-color: #e9ecef;
-    border-radius: 8px;
+    flex: 0 0 310px;
+    min-height: 340px;
+    padding: 14px;
+    background-color: #f1f5f9;
+    border: 2px solid #cbd5e1;
+    border-top: 6px solid #2563eb;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
 }
 
-.kanban-column h3 {
-    margin-top: 0;
+.kanban-column:nth-child(4n + 1) {
+    border-top-color: #2563eb;
+    background-color: #eff6ff;
+}
+
+.kanban-column:nth-child(4n + 2) {
+    border-top-color: #16a34a;
+    background-color: #f0fdf4;
+}
+
+.kanban-column:nth-child(4n + 3) {
+    border-top-color: #f97316;
+    background-color: #fff7ed;
+}
+
+.kanban-column:nth-child(4n + 4) {
+    border-top-color: #9333ea;
+    background-color: #faf5ff;
+}
+
+.column-header {
     margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(15, 23, 42, 0.15);
 }
 
-.kanban-column ul {
-    padding: 0;
+.column-header h3 {
     margin: 0;
+    color: #0f172a;
+}
+
+/* Lista kart */
+
+.cards-list {
+    padding: 0;
+    margin: 14px 0 0;
     list-style: none;
 }
 
+/* Karty */
+
 .kanban-card {
-    margin-bottom: 12px;
-    padding: 12px;
+    margin-bottom: 14px;
+    padding: 14px;
     background-color: #ffffff;
-    border: 1px solid #d0d0d0;
-    border-radius: 6px;
+    border: 2px solid #e2e8f0;
+    border-left: 6px solid #2563eb;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(15, 23, 42, 0.08);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.kanban-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(15, 23, 42, 0.12);
+}
+
+.kanban-card:nth-child(4n + 1) {
+    border-left-color: #2563eb;
+}
+
+.kanban-card:nth-child(4n + 2) {
+    border-left-color: #16a34a;
+}
+
+.kanban-card:nth-child(4n + 3) {
+    border-left-color: #f97316;
+}
+
+.kanban-card:nth-child(4n + 4) {
+    border-left-color: #9333ea;
 }
 
 .kanban-card h4 {
     margin: 0 0 8px;
+    color: #1e293b;
 }
 
 .kanban-card p {
     margin: 6px 0;
-    color: #444;
-} */
-
-.board-container {
-    margin-bottom: 32px;
-    padding: 16px;
-    background-color: #ffffff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
+    color: #475569;
+    line-height: 1.4;
 }
 
-.board-container > h2 {
-    margin-top: 0;
-    margin-bottom: 16px;
+.card-actions {
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px solid #e2e8f0;
 }
 
-.kanban-board {
-    display: flex;
-    gap: 16px;
-    align-items: flex-start;
-    overflow-x: auto;
-    padding-bottom: 8px;
-}
+/* Formularze inline przy tablicach, kolumnach i kartach */
 
-.kanban-column {
-    flex: 0 0 300px;
-    min-height: 300px;
+.inline-form {
+    margin: 12px 0;
     padding: 12px;
-    background-color: #e9ecef;
-    border-radius: 8px;
+    background-color: #ffffff;
+    border: 2px solid #dbeafe;
+    border-radius: 10px;
 }
 
+/* Panel akcji */
 
-/* Formularze */
+.actions-panel {
+    margin-top: 36px;
+    padding: 20px;
+    background-color: #ffffff;
+    border: 2px solid #c7d2fe;
+    border-radius: 14px;
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+}
+
+.actions-panel h2 {
+    margin-top: 0;
+    color: #1e3a8a;
+}
+
+.action-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.action-form {
+    margin-top: 16px;
+    padding: 14px;
+    background-color: #f8fafc;
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+}
+
+/* Starsze sekcje formularzy — zostawione dla kompatybilności */
 
 .forms-board,
 .form-column,
@@ -122,9 +233,12 @@ main {
     margin-bottom: 32px;
     padding: 16px;
     background-color: #ffffff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
+    border: 2px solid #c7d2fe;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
 }
+
+/* Formularze */
 
 form {
     margin-bottom: 20px;
@@ -132,13 +246,15 @@ form {
 
 fieldset {
     padding: 16px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
+    border: 2px solid #cbd5e1;
+    border-radius: 10px;
+    background-color: #ffffff;
 }
 
 legend {
     padding: 0 8px;
     font-weight: bold;
+    color: #1e3a8a;
 }
 
 label {
@@ -146,75 +262,134 @@ label {
     margin-top: 12px;
     margin-bottom: 4px;
     font-weight: bold;
+    color: #334155;
 }
 
-input {
+input,
+textarea,
+select {
     width: 100%;
     max-width: 360px;
-    padding: 8px;
-    border: 1px solid #bbb;
-    border-radius: 4px;
+    padding: 9px 10px;
+    border: 2px solid #cbd5e1;
+    border-radius: 6px;
+    background-color: #ffffff;
+    color: #0f172a;
 }
+
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+/* Przyciski */
 
 button {
     margin-top: 16px;
-    padding: 8px 14px;
-    border: none;
-    border-radius: 4px;
+    padding: 9px 14px;
+    border: 1px solid #1d4ed8;
+    border-radius: 6px;
     background-color: #2563eb;
     color: #ffffff;
     cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 button:hover {
     background-color: #1d4ed8;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(37, 99, 235, 0.25);
 }
+
+button:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+/* Przycisk usuwania */
+
+.delete-form {
+    margin: 0;
+}
+
+.delete-form button {
+    background-color: #dc2626;
+    border-color: #b91c1c;
+}
+
+.delete-form button:hover {
+    background-color: #b91c1c;
+    box-shadow: 0 4px 10px rgba(220, 38, 38, 0.25);
+}
+
+/* Ukrywanie formularzy */
+
+.hidden {
+    display: none;
+}
+
+/* Footer */
 
 footer {
     padding: 16px;
     text-align: center;
-    color: #666;
+    color: #64748b;
 }
 
-/* Prosta responsywność */
+/* Responsywność */
 
 @media (max-width: 768px) {
     main {
         padding: 12px;
     }
 
-    .kanban-column {
-        width: 100%;
-        margin-right: 0;
+    .board-container,
+    .actions-panel {
+        padding: 14px;
     }
 
-    input {
+    .kanban-board {
+        flex-direction: column;
+        overflow-x: visible;
+        padding: 12px;
+    }
+
+    .kanban-column {
+        flex: 1 1 auto;
+        width: 100%;
+        min-height: auto;
+    }
+
+    .board-header,
+    .column-header,
+    .card-actions {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+    }
+
+    .action-buttons button {
+        width: 100%;
+    }
+
+    input,
+    textarea,
+    select {
         max-width: 100%;
     }
-}
 
+    button {
+        width: 100%;
+    }
 
-/* Update dla akcji */
-
-.hidden {
-    display: none;
-}
-
-.actions-panel {
-    margin-top: 32px;
-    padding: 16px;
-    background-color: #ffffff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-}
-
-.action-buttons {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 16px;
-}
-
-.action-form {
-    margin-top: 16px;
+    .delete-form {
+        width: 100%;
+    }
 }

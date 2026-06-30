@@ -12,25 +12,114 @@
 
     <header>
         <h1>Kanban Board - Tablica kanban</h1>
-        <p>Aplikacja do zarządzania zadaniami</p>
+        <p>Aplikacja do zarządzania zadaniami - Autor: Sebastian Musiał</p>
     </header>
 
     <main>
         {% for board in boards %}
         <section class="board-container">
-            <h2>{{ board.name }} — ID: {{ board.board_id }}</h2>
+            <div class="board-header">
+                <h2>{{ board.name }}</h2>
+
+                <button type="button" data-toggle-form="add-column-{{ board.board_id }}">
+                    Dodaj kolumnę
+                </button>
+            </div>
+
+            <form
+                id="add-column-{{ board.board_id }}"
+                class="inline-form hidden"
+                method="post"
+                action="/board/{{ board.board_id }}/column"
+            >
+                <fieldset>
+                    <legend>Dodaj kolumnę do tablicy: {{ board.name }}</legend>
+
+                    <label>Nazwa kolumny</label>
+                    <input type="text" name="name" required>
+
+                    <label>Kolejność kolumny</label>
+                    <input type="number" name="order_id" required>
+
+                    <button type="submit">Dodaj kolumnę</button>
+                </fieldset>
+            </form>
 
             <section class="kanban-board">
-                {% for column in board.columns %}
+                {% for column in board.columns|sort(attribute="order_id") %}
                 <section class="kanban-column">
-                    <h3>{{ column.name }} — ID: {{ column.column_id }}</h3>
+                    <div class="column-header">
+                        <h3>{{ column.name }}</h3>
 
-                    <ul>
+                        <button type="button" data-toggle-form="add-card-{{ column.column_id }}">
+                            Dodaj kartę
+                        </button>
+                    </div>
+
+                    <form
+                        id="add-card-{{ column.column_id }}"
+                        class="inline-form hidden"
+                        method="post"
+                        action="/board/{{ board.board_id }}/column/{{ column.column_id }}/card"
+                    >
+                        <fieldset>
+                            <legend>Dodaj kartę do kolumny: {{ column.name }}</legend>
+
+                            <label>Tytuł</label>
+                            <input type="text" name="title" required>
+
+                            <label>Opis</label>
+                            <input type="text" name="description" required>
+
+                            <label>Termin</label>
+                            <input type="datetime-local" name="deadline" required>
+
+                            <button type="submit">Dodaj kartę</button>
+                        </fieldset>
+                    </form>
+
+                    <ul class="cards-list">
                         {% for card in column.cards %}
                         <li class="kanban-card">
-                            <h4>{{ card.title }} — ID: {{ card.card_id }}</h4>
+                            <h4>{{ card.title }}</h4>
                             <p>{{ card.description }}</p>
                             <p>Termin: {{ card.deadline }}</p>
+
+                            <div class="card-actions">
+                                <button type="button" data-toggle-form="edit-card-{{ card.card_id }}">
+                                    Edytuj
+                                </button>
+
+                                <form
+                                    class="delete-form"
+                                    method="delete"
+                                    action="/board/{{ board.board_id }}/column/{{ column.column_id }}/card/{{ card.card_id }}"
+                                >
+                                    <button type="submit">Usuń</button>
+                                </form>
+                            </div>
+
+                            <form
+                                id="edit-card-{{ card.card_id }}"
+                                class="inline-form hidden"
+                                method="post"
+                                action="/board/{{ board.board_id }}/column/{{ column.column_id }}/card/{{ card.card_id }}"
+                            >
+                                <fieldset>
+                                    <legend>Edytuj kartę</legend>
+
+                                    <label>Tytuł</label>
+                                    <input type="text" name="title" value="{{ card.title }}" required>
+
+                                    <label>Opis</label>
+                                    <input type="text" name="description" value="{{ card.description }}" required>
+
+                                    <label>Termin</label>
+                                    <input type="datetime-local" name="deadline" required>
+
+                                    <button type="submit">Zapisz zmiany</button>
+                                </fieldset>
+                            </form>
                         </li>
                         {% endfor %}
                     </ul>
@@ -41,7 +130,7 @@
         {% endfor %}
 
         <!--ACTIONS-->
-        <section class="actions-panel">
+        <!-- <section class="actions-panel">
     <h2>Panel akcji</h2>
 
     <div class="action-buttons">
@@ -60,7 +149,7 @@
 
         <!-- BOARD FORMS -->
 
-        <form id="add-board-form" class="action-form hidden" method="post" action="/board">
+        <!-- <form id="add-board-form" class="action-form hidden" method="post" action="/board">
             <fieldset>
                 <legend>Dodaj tablicę</legend>
 
@@ -218,7 +307,7 @@
     </main>
 
     <footer >
-
+        <p>Aplikacja do zarządzania zadaniami - Autor: Sebastian Musiał</p>
     </footer>
 
     <!-- Plik JavaScript -->

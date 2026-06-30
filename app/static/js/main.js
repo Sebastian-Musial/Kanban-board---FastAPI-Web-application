@@ -129,8 +129,26 @@ function handleActionButtons() {
     });
 }
 
+function handleInlineForms() {
+    const buttons = document.querySelectorAll("[data-toggle-form]");
+
+    buttons.forEach((button) => {
+        button.addEventListener("click", () => {
+            const formId = button.dataset.toggleForm;
+            const form = document.getElementById(formId);
+
+            if (!form) {
+                return;
+            }
+
+            form.classList.toggle("hidden");
+        });
+    });
+}
+
 document.addEventListener("DOMContentLoaded", () => { //Uruchomienie skryptów po załadowaniu HTML.
     handlePostForms();
     handleDeleteForms();
     handleActionButtons();
+    handleInlineForms();
 });
