@@ -1,7 +1,7 @@
 services:
   postgres:
     image: postgres:16
-    container_name: kanban board
+    container_name: kanban-board
     restart: unless-stopped
     environment:
       POSTGRES_USER: ${POSTGRES_USER}

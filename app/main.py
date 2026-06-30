@@ -18,8 +18,8 @@ def create_app(create_tables_on_startup: bool = True) -> FastAPI:
     application.include_router(card_routers)
     application.include_router(column_routers)
 
-    application.mount("/static", StaticFiles(directory="static"), name="static")
-    templates = Jinja2Templates(directory="templates")
+    application.mount("/static", StaticFiles(directory="app/static"), name="static")
+    templates = Jinja2Templates(directory="app/templates")
     
     if create_tables_on_startup:
         create_db_and_tables()
@@ -29,9 +29,9 @@ def create_app(create_tables_on_startup: bool = True) -> FastAPI:
         boards = session.exec(select(KanbanBoard)).all()
 
         return templates.TemplateResponse(
-            "index.html",
-            {
-                "request": request,
+            request=request,
+            name="index.html",
+            context={
                 "boards": boards
             }
         )
