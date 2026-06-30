@@ -16,6 +16,38 @@
     </header>
 
     <main>
+        <section class="create-board-section">
+            <div class="create-board-content">
+                <div>
+                    <h2>Twoje tablice kanban</h2>
+                </div>
+
+                <button
+                    type="button"
+                    class="create-board-button"
+                    data-toggle-form="add-board-form"
+                >
+                    + Dodaj tablicę
+                </button>
+            </div>
+
+            <form
+                id="add-board-form"
+                class="inline-form hidden"
+                method="post"
+                action="/board"
+            >
+                <fieldset>
+                    <legend>Dodaj nową tablicę</legend>
+
+                    <label>Nazwa tablicy</label>
+                    <input type="text" name="name" required>
+
+                    <button type="submit">Utwórz tablicę</button>
+                </fieldset>
+            </form>
+        </section>
+
         {% for board in boards %}
         <section class="board-container">
             <div class="board-header">
