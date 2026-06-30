@@ -31,7 +31,7 @@ main {
 
 /* Widok tablicy */
 
-.kanban-board {
+/* .kanban-board {
     margin-bottom: 32px;
     padding: 16px;
     background-color: #ffffff;
@@ -82,7 +82,37 @@ main {
 .kanban-card p {
     margin: 6px 0;
     color: #444;
+} */
+
+.board-container {
+    margin-bottom: 32px;
+    padding: 16px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
 }
+
+.board-container > h2 {
+    margin-top: 0;
+    margin-bottom: 16px;
+}
+
+.kanban-board {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    overflow-x: auto;
+    padding-bottom: 8px;
+}
+
+.kanban-column {
+    flex: 0 0 300px;
+    min-height: 300px;
+    padding: 12px;
+    background-color: #e9ecef;
+    border-radius: 8px;
+}
+
 
 /* Formularze */
 
@@ -161,4 +191,30 @@ footer {
     input {
         max-width: 100%;
     }
+}
+
+
+/* Update dla akcji */
+
+.hidden {
+    display: none;
+}
+
+.actions-panel {
+    margin-top: 32px;
+    padding: 16px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.action-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.action-form {
+    margin-top: 16px;
 }

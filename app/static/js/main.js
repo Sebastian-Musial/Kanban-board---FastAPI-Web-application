@@ -109,8 +109,28 @@ function handleDeleteForms() {
     });
 }
 
+function handleActionButtons() {
+    const buttons = document.querySelectorAll("[data-target]");
+    const forms = document.querySelectorAll(".action-form");
+
+    buttons.forEach((button) => {
+        button.addEventListener("click", () => {
+            const targetId = button.dataset.target;
+            const targetForm = document.getElementById(targetId);
+
+            forms.forEach((form) => {
+                form.classList.add("hidden");
+            });
+
+            if (targetForm) {
+                targetForm.classList.remove("hidden");
+            }
+        });
+    });
+}
 
 document.addEventListener("DOMContentLoaded", () => { //Uruchomienie skryptów po załadowaniu HTML.
     handlePostForms();
     handleDeleteForms();
+    handleActionButtons();
 });
